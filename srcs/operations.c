@@ -6,14 +6,14 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 10:15:07 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/04 15:38:49 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/05 18:14:05 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "../include/push_swap.h"
 
-int swap_a(t_stacks *s)
+int swap_a(t_stacks *s, char *out)
 {
 	int temp;
 	if (s->size_a != 0)
@@ -22,11 +22,11 @@ int swap_a(t_stacks *s)
 		s->stacks[s->size_a - 1] = s->stacks[s->size_a - 2];
 		s->stacks[s->size_a - 2] = temp;
 	}
+    ft_putstr_fd(out, 1);
 	return 1;	
-
 }
 
-int swap_b(t_stacks *s)
+int swap_b(t_stacks *s, char *out)
 {
 	int temp;
 	if (s->size_b != 0)
@@ -35,20 +35,21 @@ int swap_b(t_stacks *s)
 		s->stacks[s->start_b + s->size_b -1] = s->stacks[s->start_b + s->size_b - 2];
 		s->stacks[s->start_b + s->size_b - 2] = temp;
 	}
+    ft_putstr_fd(out, 1);
 	return 1;	
 
 }
 
-int swap_both(t_stacks *s)
+int swap_both(t_stacks *s, char *out)
 {
-	swap_a(s);
-	swap_b(s);
+	swap_a(s, "");
+	swap_b(s, "");
+    ft_putstr_fd(out, 1);
 	return (1);
 }
 
-int push_b(t_stacks *s)
+int push_b(t_stacks *s, char *out)
 {
-	int temp;
 
 	if (s->size_a != 0)
 	{	
@@ -56,17 +57,13 @@ int push_b(t_stacks *s)
 		s->size_b++;
 		s->size_a--;
 	}
-
+    ft_putstr_fd(out, 1);
 	return 1;	
 }
 
-int push_a(t_stacks *s)
+int push_a(t_stacks *s, char *out)
 {
-	int temp;
 	
-//	printf("this is size_b %d\n", s->size_b);
-//	printf("this is start_b %d\n", s->start_b);
-//	printf("this is size_a %d\n", s->size_a);
 	if(s->size_b != 0)
 	{
 		s->stacks[s->size_a] = s->stacks[s->start_b + s->size_b - 1];
@@ -74,10 +71,12 @@ int push_a(t_stacks *s)
 		s->size_b--;
 	}
 
+    ft_putstr_fd(out, 1);
+
 	return 1;	
 }
 
-int	rotate_a(t_stacks *s)
+int	rotate_a(t_stacks *s, char *out)
 {
 	int temp;
 	int d;
@@ -93,10 +92,11 @@ int	rotate_a(t_stacks *s)
 		}	
 		s->stacks[0] = temp;
 	}
+    ft_putstr_fd(out, 1);
 	return (1);
 }
 
-int	reverse_rotate_a(t_stacks *s)
+int	reverse_rotate_a(t_stacks *s, char *out)
 {
 	int temp;
 	int d;
@@ -112,10 +112,11 @@ int	reverse_rotate_a(t_stacks *s)
 		}	
 		s->stacks[s->size_a - 1] = temp;
 	}
+    ft_putstr_fd(out, 1);
 	return (1);
 }
 
-int	reverse_rotate_b(t_stacks *s)
+int	reverse_rotate_b(t_stacks *s, char *out)
 {
 	int temp;
 	int d;
@@ -131,17 +132,19 @@ int	reverse_rotate_b(t_stacks *s)
 		}	
 		s->stacks[s->start_b + s->size_b - 1] = temp;
 	}
+    ft_putstr_fd(out, 1);
 	return (1);
 }
 
-int	reverse_rotate_both(t_stacks *s)
+int	reverse_rotate_both(t_stacks *s, char *out)
 {
-	reverse_rotate_a(s);
-	reverse_rotate_b(s);
+	reverse_rotate_a(s, "");
+	reverse_rotate_b(s, "");
+    ft_putstr_fd(out, 1);
 	return (1);
 }
 
-int	rotate_b(t_stacks *s)
+int	rotate_b(t_stacks *s, char *out)
 {
 	int temp;
 	int d;
@@ -157,13 +160,15 @@ int	rotate_b(t_stacks *s)
 		}	
 		s->stacks[s->start_b] = temp;
 	}
+    ft_putstr_fd(out, 1);
 	return (1);
 }
 
-int	rotate_both(t_stacks *s)
+int	rotate_both(t_stacks *s, char *out)
 {
-	rotate_a(s);
-	rotate_b(s);
+	rotate_a(s, "");
+	rotate_b(s, "");
+    ft_putstr_fd(out, 1);
 	return (1);
 }
 
@@ -174,7 +179,7 @@ int is_sorted(t_stacks *s, int start, int length)
 	d = start;
 	while (d < start + length - 1)
 	{
-		if (s->stacks[d] > s->stacks[d + 1])
+		if (s->stacks[d] < s->stacks[d + 1])
 			return 0;
 		d++;
 	}
