@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 13:00:43 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/05 18:53:44 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/06 14:47:25 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,13 @@ int fill_struct(t_stacks *s, char **argv, int argc)
     argray = ft_split(argstr, ' ');
     free (argstr);
     s->size_a = 0;
+
     while (argray[s->size_a])
         s->size_a++;
-
     s->stacks = (int *)malloc(sizeof(int) * s->size_a * 2);
     s->size_b = 0;
     s->start_b = s->size_a;
+    s->stacks_b = &s->stacks[s->start_b];
     if (!fill_stack(s, argray, s->size_a))
         return (0);
     free(argray);
@@ -191,24 +192,25 @@ void lil_sort(t_stacks *s)
 
 void    small_sort(t_stacks *s)
 {
+    int turns;
+
+    turns = 0;
     push_b(s, "pb\n");
     if (s->size_a == 4)
         push_b(s, "pb\n");
     lil_sort(s);
-    if (!is_sorted(s, s->start_b -1, s->size_b))
+    if (!is_sorted(s, s->start_b, s->size_b))
         swap_b(s, "sb\n");
-    if (s->stacks[s->start_b] > s->stacks[0])
-        push_a(s, "pa\n");
-    while (s->size_b != 0)
+    while (s->size_b != 0 || !is_sorted(s, 0, s->size_a))
     {
-        if (s->stacks[s->start_b + s->size_b - 1] < s->stacks[s->size_a - 1])
+        if (s->size_b > 0 && (s->stacks_b[s->size_b - 1] < s->stacks[s->size_a - 1] || turns == s->size_a))
             push_a(s, "pa\n");
-
-        rotate_a(s, "ra\n");
+        else
+        {
+            rotate_a(s, "ra\n");
+            turns++;
+        }
     }
-    while (!is_sorted(s, 0, s->size_a))
-        rotate_a(s, "ra\n");
-
 }
 
 int sort(t_stacks *s)
@@ -219,6 +221,8 @@ int sort(t_stacks *s)
         lil_sort(s);
     else if (s->size_a <= 5)
         small_sort(s);
+    else
+        quicksort(s, s->size_a, s->stacks[s->size_a -1]);
     return 0;
 }
 
@@ -233,10 +237,10 @@ int	main(int argc, char **argv)
             printf("invalid argument \n");
             return 0;
         }
-  //      print_stacks(s, argc);
+        print_stacks(s);
         concat_arg(argv, argc);
         sort(s);
-      print_stacks(s);
+        print_stacks(s);
         /*        push_b(s);
                   printf("\n\n\n\n");
                   print_stacks(s, argc);

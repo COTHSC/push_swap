@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 10:15:07 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/05 18:14:05 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:16:52 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,4 +184,27 @@ int is_sorted(t_stacks *s, int start, int length)
 		d++;
 	}
 	return 1;
+}
+
+
+int quicksort(t_stacks *s, int len, int pivot)
+{
+    int i;
+
+    i = 0;
+    while (i++ < len)
+    {
+        if (s->stacks[s->size_a -1] >= pivot)
+        {
+            swap_a(s, "sa\n");
+            rotate_a(s, "ra\n");
+        }
+        else
+        {
+            swap_a(s, "sa\n");
+        }
+
+    }
+
+    return (1);
 }

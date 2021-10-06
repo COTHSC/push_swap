@@ -9,6 +9,7 @@
 
 typedef struct s_stacks {
 	int *stacks;
+	int *stacks_b;
 	int size_b;
 	int size_a;
 	int start_b;
@@ -26,6 +27,7 @@ int reverse_rotate_b(t_stacks *s, char *out);
 int push_a(t_stacks *s, char *out);
 int reverse_rotate_both(t_stacks *s, char *out);
 int is_sorted(t_stacks *s, int start, int length);
+int quicksort(t_stacks *s, int len, int pivot);
 
 
 #endif
