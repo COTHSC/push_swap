@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 13:00:43 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/06 14:47:25 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/07 21:03:23 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,11 @@ int sort(t_stacks *s)
     else if (s->size_a <= 5)
         small_sort(s);
     else
-        quicksort(s, s->size_a, s->stacks[s->size_a -1]);
+        quicksort(s, 0, s->size_a - 1);
+       // quickswap(s, 7, 8);
+        //quickswap(s, 5, 7);
+
+
     return 0;
 }
 
@@ -237,10 +241,10 @@ int	main(int argc, char **argv)
             printf("invalid argument \n");
             return 0;
         }
-        print_stacks(s);
+       // print_stacks(s);
         concat_arg(argv, argc);
         sort(s);
-        print_stacks(s);
+      //  print_stacks(s);
         /*        push_b(s);
                   printf("\n\n\n\n");
                   print_stacks(s, argc);
