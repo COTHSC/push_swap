@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 13:00:43 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/07 21:03:23 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/08 19:25:43 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ int sort(t_stacks *s)
         small_sort(s);
     else
         quicksort(s, 0, s->size_a - 1);
-       // quickswap(s, 7, 8);
+       // quickswap(s, 4, 6);
         //quickswap(s, 5, 7);
 
 
@@ -242,9 +242,21 @@ int	main(int argc, char **argv)
             return 0;
         }
        // print_stacks(s);
-        concat_arg(argv, argc);
-        sort(s);
-      //  print_stacks(s);
+      //  concat_arg(argv, argc);
+      /*  quickswap(s, 1, 7);
+        quickswap(s, 1, 7);
+        quickswap(s, 4, 6);
+        quickswap(s, 4, 6);
+        quickswap(s, 0, 7);
+        quickswap(s, 0, 7);
+        quickswap(s, 4, 5);
+        quickswap(s, 4, 5);
+        quickswap(s, 0, 1);
+        quickswap(s, 0, 1);
+        quickswap(s, 6, 7);
+        quickswap(s, 6, 7);*/
+         sort(s);
+     //   print_stacks(s);
         /*        push_b(s);
                   printf("\n\n\n\n");
                   print_stacks(s, argc);
