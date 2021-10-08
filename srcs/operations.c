@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 10:15:07 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/08 19:35:09 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/08 19:41:45 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,121 +243,87 @@ int get_to_top(t_stacks *s, int pos)
     return i;
 }
 
+/*
+   int quickswap(t_stacks *s, int pos1, int pos2)
+   {
+   int counter;
 
-int quickswap(t_stacks *s, int pos1, int pos2)
+   if (pos2 > pos1)
+   {
+
+   counter = 0;
+
+   counter = get_to_top(s, pos2);
+   push_b(s,"pb\n");
+   counter += get_to_top(s, pos1 + counter);
+   push_b(s,"pb\n");
+   swap_b(s, "sb\n");
+   push_a(s,"pa\n");
+   counter += get_to_top(s, counter + pos2 - 1);
+   push_a(s,"pa\n");
+//  print_stacks(s);
+while (counter != 0)
 {
-    int counter;
-
-    if (pos1 < pos2)
-    {
-
-    counter = 0;
-    
-    counter = get_to_top(s, pos2);
-    push_b(s,"pb\n");
-    counter += get_to_top(s, pos1 + counter);
-    push_b(s,"pb\n");
-    swap_b(s, "sb\n");
-    push_a(s,"pa\n");
-    counter += get_to_top(s, counter + pos2 - 1);
-    push_a(s,"pa\n");
- //  print_stacks(s);
-    while (counter != 0)
-    {
-        if (counter < 0)
-        {
-            rotate_a(s, "ra\n");
-            counter++;
-        }
-
-        if (counter > 0)
-        {
-            reverse_rotate_a(s, "rra\n");
-            counter--;
-        }
-    }
-    }
-return (1);
+if (counter < 0)
+{
+rotate_a(s, "ra\n");
+counter++;
 }
 
-/*
+if (counter > 0)
+{
+reverse_rotate_a(s, "rra\n");
+counter--;
+}
+}
+}
+return (1);
+}
+*/
+
 int quickswap(t_stacks *s, int pos1, int pos2)
 {
     int i;
     int j;
     int counter;
 
-
     counter = 0;
     i = pos1;
     j = pos2;
     if (pos2 > pos1)
     {
-        counter = get_to_top(s, pos2);
-        //    while (j + 1 != s->size_a)
-        //  {
-        // rotate_a(s, "ra\n");
-        //      j++;
-        //   i++;
-        // }
-        push_b(s,"pb\n");
-        counter += get_to_top(s, pos1 + counter);
-        //  while (i + 1 != s->size_a)
-        //  {
-        //    rotate_a(s, "ra\n");
-        //  i++;
-        //  }
-        push_b(s,"pb\n");
-        print_stacks(s);
-        swap_b(s, "sb\n");
-        print_stacks(s);
-        push_a(s,"pa\n");
-        print_stacks(s);
-        counter += get_to_top(s, pos1 + counter);
-        print_stacks(s);
-        //   while (counter > 1)
-        //   {
-        //      reverse_rotate_a(s, "rra\n");
-        //     counter--;
-        // }
-        // while (i + 1 != pos2)
-        // {
-        //  if (i == s->size_a)
-        //       i = i - (s->size_a);
-        //      rotate_a(s,"ra\n");
-        //    reverse_rotate_a(s,"rra\n");
-        //  i--;
-        // }
-        push_a(s,"pa\n");
-        while (counter != 0)
+        while (j + 1 != s->size_a)
         {
-            if (counter < 0)
-            {
-                rotate_a(s, "ra\n");
-                counter++;
-            }
-
-            if (counter > 0)
-            {
-                reverse_rotate_a(s, "rra\n");
-                counter--;
-            }
+            rotate_a(s, "ra\n");
+            j++;
+            i++;
         }
-        //  {
-        //     reverse_rotate_a(s, "rra\n");
-        //    counter--;
-        //  }
-
-        //   while (i  !=  pos1)
-        //   {
-        //    reverse_rotate_a(s,"rra\n");
-        //   i--;
-        // }
-        print_stacks(s);
+        push_b(s,"pb\n");
+        while (i + 1 != s->size_a)
+        {
+            rotate_a(s, "ra\n");
+            i++;
+        }
+        push_b(s,"pb\n");
+        swap_b(s, "sb\n");
+        push_a(s,"pa\n");
+        while (i + 1 != pos2)
+        {
+          //  if (i == s->size_a)
+          //      i = i - (s->size_a);
+           // rotate_a(s,"ra\n");
+           reverse_rotate_a(s,"rra\n");
+            i--;
+        }
+        push_a(s,"pa\n");
+        while (i  !=  pos1)
+        {
+           reverse_rotate_a(s,"rra\n");
+           i--;
+        }
     }
     return (1);
-}*/
-
+}
 
 void    quicksort(t_stacks *s, int low, int high)
 {
@@ -372,9 +338,9 @@ void    quicksort(t_stacks *s, int low, int high)
         j = high;
         while (i < j)
         {
-            while (s->stacks[i] >= s->stacks[pivot] && i < high)
+            while (s->stacks[i] > s->stacks[pivot] && i < high)
                 i++;
-            while (s->stacks[j] < s->stacks[pivot] && j > low)
+            while (s->stacks[j] <= s->stacks[pivot] && j > low)
                 j--;
             if ( i < j)
             {
