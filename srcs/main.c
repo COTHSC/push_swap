@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 13:00:43 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/08 19:25:43 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/09 15:07:42 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ int	main(int argc, char **argv)
         }
        // print_stacks(s);
       //  concat_arg(argv, argc);
-      /*  quickswap(s, 1, 7);
+       /*quickswap(s, 1, 7);
         quickswap(s, 1, 7);
         quickswap(s, 4, 6);
         quickswap(s, 4, 6);
@@ -254,9 +254,17 @@ int	main(int argc, char **argv)
         quickswap(s, 0, 1);
         quickswap(s, 0, 1);
         quickswap(s, 6, 7);
-        quickswap(s, 6, 7);*/
+        quickswap(s, 6, 7);
+        quickswap(s, 1, 6);
+        quickswap(s, 1, 6);
+        quickswap(s, 6, 7);
+        quickswap(s, 6, 7);
+        quickswap(s, 0, 1);
+        quickswap(s, 0, 1);
+        quickswap(s, 5, 6);
+        quickswap(s, 5, 6);*/
          sort(s);
-     //   print_stacks(s);
+       // print_stacks(s);
         /*        push_b(s);
                   printf("\n\n\n\n");
                   print_stacks(s, argc);
