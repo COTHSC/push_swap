@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 13:00:43 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/09 18:30:49 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/09 18:39:59 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ int	main(int argc, char **argv)
   //      quickerswap(s, 4, 7);
 //        quickerswap(s, 4, 7);
          sort(s);
-     //    print_stacks(s);
+    //     print_stacks(s);
         /*        push_b(s);
                   printf("\n\n\n\n");
                   print_stacks(s, argc);

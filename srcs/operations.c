@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 10:15:07 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/09 18:30:32 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/09 18:39:47 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -489,9 +489,18 @@ void    quicksort(t_stacks *s, int low, int high, int offset)
         while (i < j)
         {
             while (s->stacks[i] > s->stacks[pivot] && i < high)
+            {
+                if (i == s->size_a)
+                    i = 0;
                 i++;
+            }
+
             while (s->stacks[j] <= s->stacks[pivot] && j > low)
+            { 
+                if (j == s->size_a)
+                    j = 0;
                 j--;
+            }
             if ( i < j)
             {
                 quickerswap(s, i, j);
