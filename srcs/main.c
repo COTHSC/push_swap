@@ -222,8 +222,9 @@ int sort(t_stacks *s)
     else if (s->size_a <= 5)
         small_sort(s);
     else
-        quicksort(s, 0, s->size_a - 1, 0);
-       // quickswap(s, 4, 6);
+        quicksort_b(s, 0, s->size_a - 1, 3);
+    
+      // quickswap(s, 4, 6);
         //quickswap(s, 5, 7);
 
 
@@ -253,8 +254,11 @@ int	main(int argc, char **argv)
     //    quickerswap(s, 0, 7);
   //      quickerswap(s, 4, 7);
 //        quickerswap(s, 4, 7);
-         sort(s);
-    //     print_stacks(s);
+
+        // print_stacks(s);
+        quick_b(s, 0, s->size_a, 'a');
+	//sort(s);
+        print_stacks(s);
         /*        push_b(s);
                   printf("\n\n\n\n");
                   print_stacks(s, argc);
