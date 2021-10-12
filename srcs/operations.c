@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 10:15:07 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/09 18:39:47 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/12 01:01:48 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -512,7 +512,7 @@ void    quicksort_b(t_stacks *s, int low, int high, int offset)
 	}
 }
 
-static int limit = 1;
+static int limit = 0;
 
 int	quick_b(t_stacks *s, int low, int high, char amhere)
 {
@@ -523,16 +523,21 @@ int	quick_b(t_stacks *s, int low, int high, char amhere)
 	ra = 0;
 
 
+		if (is_sorted(s, 0, s->size_a))
+		{
+			return 1;
+		}
 	low = 1;	
-	i = 0;
+	i = -1;
 	if (amhere == 'a')
 	{
 		pivot = s->stacks[s->size_a - 1];
-		while (i++ < s->size_a - 1)
+		while (i++ <= s->size_a + 1)
 		{
 			if (s->stacks[s->size_a - 1] >= pivot)
 			{
 				push_b(s, "pb\n");
+				i--;
 			}
 			else
 			{
@@ -547,6 +552,12 @@ int	quick_b(t_stacks *s, int low, int high, char amhere)
 	{
 		i = 0;
 		rotate_b(s, "rb\n");
+		if (is_sorted(s, s->start_b, s->size_b))
+		{
+			limit++;
+			quick_b(s, 0, s->size_a - 1, 'a');
+		}
+
 		pivot = s->stacks_b[s->size_b - 1];
 
 		while (i++ < s->size_b)
@@ -556,13 +567,18 @@ int	quick_b(t_stacks *s, int low, int high, char amhere)
 			else
 				rotate_b(s, "rb\n");
 		}	
-		if (s->size_b > limit)
+		if (s->size_b > limit + 2)
 		{
-			limit++;
 			quick_b(s, 0, high, 'b');
 		}
 		
 	}
-	
+
+	while (limit < 18)
+	{
+		limit++;
+		quick_b(s, 0, s->size_a - 1, 'a');
+	}
+		
 	return 1;
 }
