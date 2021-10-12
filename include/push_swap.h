@@ -26,7 +26,7 @@ int reverse_rotate_a(t_stacks *s, char *out);
 int reverse_rotate_b(t_stacks *s, char *out);
 int push_a(t_stacks *s, char *out);
 int reverse_rotate_both(t_stacks *s, char *out);
-int is_sorted(t_stacks *s, int start, int length);
+int is_sorted(t_stacks *s, int start, int length, char dir);
 void quicksort(t_stacks *s, int low, int high, int offset);
 void quicksort_b(t_stacks *s, int low, int high, int offset);
  void print_stacks(t_stacks *s);
