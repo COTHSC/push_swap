@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 10:15:07 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/12 16:48:31 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/13 14:50:37 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,38 +205,9 @@ int is_min(int * array, int nbr, int len)
     return 1;
 }
 
-int get_to_top(t_stacks *s, int pos)
-{
-    int i;
-
-    if (pos > s->size_a - 1)
-        pos -= s->size_a;
-    if (pos < 0)
-        pos += s->size_a;
-    i = 0;
-    if (pos >= (s->size_a - 1) / 2)
-    {
-        while (pos != (s->size_a - 1))
-        {
-            pos++;
-            rotate_a(s, "ra\n");
-            i++;
-        }
-    } 
-    else
-    {
-        while (pos != -1)
-        {
-            pos--;
-            reverse_rotate_a(s, "rra\n");
-            i--;
-        }
-
-    } 
-    return i;
-}
 
 
+/*
 int quickswap(t_stacks *s, int pos1, int pos2)
 {
     int counter;
@@ -275,7 +246,7 @@ int quickswap(t_stacks *s, int pos1, int pos2)
     }
     return (1);
 }
-
+*/
 int quickerswap(t_stacks *s, int  pos1, int pos2)
 {
     int turns;
@@ -408,42 +379,7 @@ int quickerswap(t_stacks *s, int  pos1, int pos2)
     return (pos1 - ogpos);
 }
 
-void    quicksort(t_stacks *s, int low, int high, int offset)
-{
-    int pivot;
-    int i;
-    int j;
 
-    if (low < high)
-    {
-        i = low;
-        j = high;
-
-
-        pivot = low;
-
-        while (i < j)
-        {
-            while (s->stacks[i] > s->stacks[pivot] && i != high)
-            {
-                i++;
-            }
-
-            while (s->stacks[j] <= s->stacks[pivot] && j != low)
-            { 
-                j--;
-            }
-            if (i < j)
-            {
-                quickerswap(s, i, j);
-            }
-
-        }
-        quickerswap(s, j, i);
-        quicksort(s, low, j - 1, offset);
-        quicksort(s, j + 1, high, offset);
-    }
-}
 
 
 
@@ -498,8 +434,8 @@ void    quicksort_b(t_stacks *s, int low, int high, int offset)
             quickerswap(s, i, j);
         else
             quickerswap(s, j, i);
-        quicksort(s, low, j - 1, offset);
-        quicksort(s, j + 1, high, offset);
+        quicksort_b(s, low, j - 1, offset);
+        quicksort_b(s, j + 1, high, offset);
     }
 }
 
@@ -519,99 +455,245 @@ int get_average(int *arr, int start, int len)
     return (ret / i);
 }
 /*
-int	quick_b(t_stacks *s, int low, int high, char amhere)
+   int	quick_b(t_stacks *s, int low, int high, char amhere)
+   {
+   int pivot;
+   int i;
+   int ra;
+
+   ra = 0;
+
+
+   if (is_sorted(s, 0, s->size_a, 'a'))
+   {
+   return 1;
+   }	
+   i = 0;
+   if (amhere == 'a')
+   {
+
+//pivot = s->stacks[s->size_a - 1 - limit];
+pivot = get_average(s->stacks, low, s->size_a);
+while (i++ <= s->size_a + 1)
 {
-    int pivot;
-    int i;
-    int ra;
+if (s->stacks[s->size_a - 1] >= pivot)
+{
+push_b(s, "pb\n");
+i--;
+}
+else
+{
+rotate_a(s, "ra\n");
+ra++;
+}
+}	
+quick_b(s, low, s->size_b - 1, 'b');
+}
+else
+{
+i = 0;
+rotate_b(s, "rb\n");
 
-    ra = 0;
+pivot = s->stacks_b[s->size_b - 1];
+//		pivot = get_average(s->stacks_b, 0, s->size_b);
 
-
-    if (is_sorted(s, 0, s->size_a, 'a'))
-    {
-        return 1;
-    }	
-    i = 0;
-    if (amhere == 'a')
-    {
-
-        //pivot = s->stacks[s->size_a - 1 - limit];
-        pivot = get_average(s->stacks, low, s->size_a);
-        while (i++ <= s->size_a + 1)
-        {
-            if (s->stacks[s->size_a - 1] >= pivot)
-            {
-                push_b(s, "pb\n");
-                i--;
-            }
-            else
-            {
-                rotate_a(s, "ra\n");
-                ra++;
-            }
-        }	
-        quick_b(s, low, s->size_b - 1, 'b');
-    }
-    else
-    {
-        i = 0;
-        rotate_b(s, "rb\n");
-
-        pivot = s->stacks_b[s->size_b - 1];
-        //		pivot = get_average(s->stacks_b, 0, s->size_b);
-
-        while (i++ < s->size_b &&  !is_sorted(s, s->start_b, s->size_b, 'a'))
-        {
-            if (s->stacks_b[s->size_b - 1] < pivot)
-                push_a(s, "pa\n");
-            else
-                rotate_b(s, "rb\n");
-        }	
-        if (s->size_b > limit + 1 && !is_sorted(s, s->start_b, s->size_b, 'a'))
-        {
-            quick_b(s, low, high, 'b');
-        }
-    }
-    while (limit < 350)
-    {
-        limit++;
-        quick_b(s, low, s->size_a - 1, 'a');
-    }
-    return 1;
+while (i++ < s->size_b &&  !is_sorted(s, s->start_b, s->size_b, 'a'))
+{
+if (s->stacks_b[s->size_b - 1] < pivot)
+push_a(s, "pa\n");
+else
+rotate_b(s, "rb\n");
+}	
+if (s->size_b > limit + 1 && !is_sorted(s, s->start_b, s->size_b, 'a'))
+{
+quick_b(s, low, high, 'b');
+}
+}
+while (limit < 350)
+{
+limit++;
+quick_b(s, low, s->size_a - 1, 'a');
+}
+return 1;
 }*/
 
-int	quick_b(t_stacks *s, int low, int high, char amhere)
+void    quicksort(int *arr, int low, int high)
 {
     int pivot;
     int i;
-    int low_b;
+    int j;
+    int temp;
 
-
-  //  if (is_sorted(s, 0, s->size_a, 'a'))
-  //  {
-   //     return 1;
-  //  }	
-
-    high = 1;
-    i = 0;
-    if (amhere == 'a')
+    if (low < high)
     {
-        low_b = s->size_b - 1;
-        pivot = s->stacks[s->size_a - 1 - limit];
-        while (i++ <= s->size_a - 1)
+        i = low;
+        j = high;
+
+
+        pivot = low;
+
+        while (i < j)
         {
-            if (s->stacks[s->size_a - 1] >= pivot)
+            while (arr[i] > arr[pivot] && i != high)
             {
-                push_b(s, "pb\n");
-                i--;
+                i++;
             }
-            else
+
+            while (arr[j] <= arr[pivot] && j != low)
+            { 
+                j--;
+            }
+            if (i < j)
             {
-                rotate_a(s, "ra\n");
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
-        }	
+
+        }
+        temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        quicksort(arr, low, j - 1);
+        quicksort(arr, j + 1, high);
     }
+}
+
+int get_pos(int *arr, int len, int pos)
+{
+    int i;
+    int *arrcpy;
+
+    i = 0;
+
+    arrcpy = (int *)malloc(sizeof(int) * len);
+    while (i < len)
+    {
+        arrcpy[i] = arr[i];
+        i++;
+    }
+
+    quicksort(arrcpy, 0, len - 1);
+
+    return arrcpy[pos];
+}
+
+int get_to_top(t_stacks *s, int pos)
+{
+    int i;
+
+    if (pos > s->size_b - 1)
+        pos -= s->size_b;
+    if (pos < 0)
+        pos += s->size_b;
+    i = 0;
+    if (pos >= (s->size_b - 1) / 2)
+    {
+        while (pos != (s->size_b - 1))
+        {
+            pos++;
+            rotate_b(s, "rb\n");
+            i++;
+        }
+    } 
+    else
+    {
+        while (pos != -1)
+        {
+            pos--;
+            reverse_rotate_b(s, "rrb\n");
+            i--;
+        }
+
+    } 
+    return i;
+}
+
+int where_is_min(int *arr, int min, int len)
+{
+    int i;
+
+    i = 0;
+    while (arr[i] != min && i < len)
+    {
+        i++;
+    }
+    return i;
+
+}
+
+int	quick(t_stacks *s, int low, int high)
+{
+    int i;
+    int pivot;
+
+    i = low;
+
+    pivot = get_pos(s->stacks, high, (s->size_a - 1) / 2);
+    while (s->size_a > (high/2) && i++ <= high - 1)
+    {
+        if (s->stacks[s->size_a - 1] >= pivot)
+        {
+            push_b(s, "pb\n");
+            i--;
+        }
+        else
+        {
+            rotate_a(s, "ra\n");
+        }
+    }
+    while (s->size_b != 0)
+    {
+        if (s->stacks_b[s->size_b - 1] == get_pos(s->stacks_b, s->size_b, 0))
+            push_a(s, "pa\n");
+        else
+        {
+            get_to_top(s, where_is_min(s->stacks_b, get_pos(s->stacks_b, s->size_b, 0), s->size_b));
+          //  rotate_b(s, "rb\n");
+        }
+
+    }
+
+    return 1;
+}
+
+
+
+
+
+
+
+    int	quick_b(t_stacks *s, int low, int high, char amhere)
+    {
+        int pivot;
+        int i;
+        int low_b;
+
+
+        //  if (is_sorted(s, 0, s->size_a, 'a'))
+        //  {
+        //     return 1;
+        //  }	
+
+        high = 1;
+        i = 0;
+        if (amhere == 'a')
+        {
+            low_b = s->size_b - 1;
+            pivot = s->stacks[s->size_a - 1 - limit];
+            while (i++ <= s->size_a - 1)
+            {
+                if (s->stacks[s->size_a - 1] >= pivot)
+                {
+                    push_b(s, "pb\n");
+                    i--;
+                }
+                else
+                {
+                    rotate_a(s, "ra\n");
+                }
+            }	
+        }
         i = s->size_b - 1;
         low = s->size_a - 1;
 
@@ -631,8 +713,7 @@ int	quick_b(t_stacks *s, int low, int high, char amhere)
         {
             limit++;
             quick_b(s, 0, s->size_b - 1, 'b');
-
         }
 
-    return 1;
-}
+        return 1;
+    }

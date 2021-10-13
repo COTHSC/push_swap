@@ -27,11 +27,12 @@ int reverse_rotate_b(t_stacks *s, char *out);
 int push_a(t_stacks *s, char *out);
 int reverse_rotate_both(t_stacks *s, char *out);
 int is_sorted(t_stacks *s, int start, int length, char dir);
-void quicksort(t_stacks *s, int low, int high, int offset);
+void quicksort(int *arr, int low, int high);
 void quicksort_b(t_stacks *s, int low, int high, int offset);
  void print_stacks(t_stacks *s);
  int quickerswap(t_stacks *s, int pos1, int pos2);
  int quick_b(t_stacks *s, int low, int high, char amhere);
-
+int get_pos(int *arr, int len, int pos);
+int quick(t_stacks *s, int low, int high);
 
 #endif
