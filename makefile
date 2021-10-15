@@ -1,7 +1,13 @@
 NAME = push_swap
 
 SRCS = srcs/main.c \
-	  srcs/operations.c 
+	  srcs/operations.c \
+	  srcs/utils.c \
+	  srcs/further_utils.c \
+	  srcs/sorts.c \
+	  srcs/operations_a.c \
+	  srcs/operations_b.c \
+	  srcs/operations_both.c \
 
 OBJS = $(SRCS:.c=.o)
 

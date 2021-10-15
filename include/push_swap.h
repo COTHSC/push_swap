@@ -34,5 +34,20 @@ void quicksort_b(t_stacks *s, int low, int high, int offset);
 int get_pos(int *arr, int len, int pos);
 int quick(t_stacks *s, int low, int high);
 int quick_b(t_stacks *s, int low, int high);
+int ft_unique_int(t_stacks *s, int newint, int len);
+int ft_isint(long long int i);
+int fill_stack(t_stacks *s, char **argray, int i);
+int fill_struct(t_stacks *s, char **argv, int argc);
+char *concat_arg(char **argv, int argc);
+int ft_isint(long long int i);
+int check_argstr(char *argstr);
+int ft_issign(char c);
+int ft_isnumber(char *nbrstr);
+void    small_sort(t_stacks *s);
+void lil_sort(t_stacks *s);
+int get_pos(int *arr, int len, int pos);
+int get_to_top(t_stacks *s, int pos);
+int where_is_min(int *arr, int min, int len);
+int get_to_top_a(t_stacks *s, int pos);
 
 #endif
