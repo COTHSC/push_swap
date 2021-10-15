@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 10:15:07 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/15 00:56:27 by jescully         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:15:07 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -501,7 +501,6 @@ int get_pos(int *arr, int len, int pos)
 {
     int i;
     int *arrcpy;
-	int ret;
 
     i = 0;
 
@@ -513,40 +512,8 @@ int get_pos(int *arr, int len, int pos)
     }
 
     quicksort(arrcpy, 0, len - 1);
-	ret = arrcpy[pos];
-	free(arrcpy);
-    return ret;
-}
 
-int get_to_top_a(t_stacks *s, int pos)
-{
-    int i;
-
-    if (pos > s->size_a - 1)
-        pos -= s->size_a;
-    if (pos < 0)
-        pos += s->size_a;
-    i = 0;
-    if (pos >= (s->size_a - 1) / 2)
-    {
-        while (pos != (s->size_a - 1))
-        {
-            pos++;
-            rotate_a(s, "ra\n");
-            i++;
-        }
-    } 
-    else
-    {
-        while (pos != -1)
-        {
-            pos--;
-            reverse_rotate_a(s, "rra\n");
-            i--;
-        }
-
-    } 
-    return i;
+    return arrcpy[pos];
 }
 
 int get_to_top(t_stacks *s, int pos)
@@ -593,8 +560,6 @@ int where_is_min(int *arr, int min, int len)
 
 }
 
-static int divisor = 11;
-
 int	push_to_b(t_stacks *s, int low, int high)
 {
 
@@ -604,25 +569,18 @@ int	push_to_b(t_stacks *s, int low, int high)
 
     i = 0;
 
-	chunck_size = (high / divisor++) - 1;
+	chunck_size = high / 4;
 
-	if (s->size_a <= chunck_size)
-		while (s->size_a != 0)
-            push_b(s, "pb\n");
-
-    pivot = get_pos(s->stacks, s->size_a, chunck_size);
-
-	while (i++ <= s->size_a + s->size_b - 1 && s->size_a != 0 && get_pos(s->stacks, s->size_a, 0) >= pivot)
+    pivot = get_pos(s->stacks, s->size_a, (s->size_a - 1) / 4);
+    while (i++ <= s->size_a - 1 && s->size_a != 0)
     {
-		if (get_pos(s->stacks, s->size_a, 1) < pivot)
-			get_to_top_a(s, where_is_min(s->stacks, get_pos(s->stacks, s->size_a, 0), s->size_a));
         if (s->stacks[s->size_a - 1] >= pivot)
             push_b(s, "pb\n");
         else
-			rotate_a(s, "ra\n");
+            rotate_a(s, "ra\n");
     }
 	while (s->size_a != 0)
-		push_to_b(s, low + chunck_size, high);
+		push_to_b(s, low, high);
 	
 	
 	
@@ -669,7 +627,7 @@ int and_back_to_a(t_stacks *s, int low,  int high)
 int	quick(t_stacks *s, int low, int high)
 {
 	low++;
-	push_to_b(s, 0, s->size_a);
+	push_to_b(s, 0, high);
 	and_back_to_a(s, 0, high);
 	return 1;
 }
