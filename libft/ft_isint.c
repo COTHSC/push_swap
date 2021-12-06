@@ -6,15 +6,15 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 14:06:43 by jescully          #+#    #+#             */
-/*   Updated: 2021/12/06 14:09:55 by jescully         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:13:01 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
+#include "libft.h"
 
 int	ft_isint(long long int i)
 {
-	if (i <= INT_MAX && i >= INT_MIN)
+	if (i <= 2147483647 && i >= -2147483648)
 		return (1);
 	return (0);
 }

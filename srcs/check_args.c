@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 14:11:18 by jescully          #+#    #+#             */
-/*   Updated: 2021/12/06 14:21:11 by jescully         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:04:53 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ int	ft_unique_int(t_stacks *s, int new, int len)
 	while (d < len)
 	{
 		if (s->stacks[i - d - 1] == new)
-		{
-			ft_putstr_fd("Error\n", 2);
 			return (0);
-		}
 		d++;
 	}
 	return (1);

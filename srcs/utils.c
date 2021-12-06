@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:21:58 by jescully          #+#    #+#             */
-/*   Updated: 2021/12/06 14:18:07 by jescully         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:08:01 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,11 @@ int	fill_stack(t_stacks *s, char **argray, int i)
 		if (ft_isint(ft_atoi(argray[d])) && \
 				ft_unique_int(s, ft_atoi(argray[d]), d))
 			s->stacks[i - 1] = ft_atoi(argray[d]);
+
+
 		else
 		{
+			ft_putstr_fd("Error\n", 2);
 			while (argray[d])
 				free(argray[d++]);
 			free(argray);

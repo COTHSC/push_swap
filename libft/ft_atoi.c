@@ -6,7 +6,7 @@
 /*   By: jescully <jescully@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 13:06:08 by jescully          #+#    #+#             */
-/*   Updated: 2020/11/25 14:08:47 by jescully         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:19:39 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static int	ft_iswhitespace(int c)
 		return (0);
 }
 
-int	ft_atoi(const char *nptr)
+long long int	ft_atoi(const char *nptr)
 {
-	int		sign;
-	int		result;
-	char	*cnptr;
+	int				sign;
+	long long int	result;
+	char			*cnptr;
 
 	sign = 1;
 	result = 0;
