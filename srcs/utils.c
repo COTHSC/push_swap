@@ -6,27 +6,26 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:21:58 by jescully          #+#    #+#             */
-/*   Updated: 2021/10/15 15:30:08 by jescully         ###   ########.fr       */
+/*   Updated: 2021/12/06 14:18:07 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-char	*concat_arg(char **argv, int argc)
+void	check_string(char *s)
 {
-	int		i;
-	char	*argstr;
-	char	*temp;
-
-	argstr = " ";
-	i = 1;
-	while (i < argc)
+	if (!check_argstr(s))
 	{
-		temp = ft_strjoin(argstr, " ");
-		argstr = ft_strjoin(temp, argv[i++]);
-		free(temp);
+		free (s);
+		ft_putstr_fd("Error\n", 2);
+		exit (0);
 	}
-	return (argstr);
+	if (check_str(s))
+	{
+		free (s);
+		ft_putstr_fd("Error\n", 2);
+		exit (0);
+	}
 }
 
 int	fill_struct(t_stacks *s, char **argv, int argc)
@@ -35,14 +34,13 @@ int	fill_struct(t_stacks *s, char **argv, int argc)
 	char	**argray;
 
 	argstr = concat_arg(argv, argc);
-	if (!check_argstr(argstr))
-		return (0);
+	check_string(argstr);
 	argray = ft_split(argstr, ' ');
 	free (argstr);
 	s->size_a = 0;
 	while (argray[s->size_a])
 		s->size_a++;
-	s->stacks = (int *)malloc(sizeof(int) * s->size_a * 2);
+	s->stacks = (int *)ft_calloc(sizeof(int), s->size_a * 2 + 1);
 	s->size_b = 0;
 	s->start_b = s->size_a;
 	s->stacks_b = &s->stacks[s->start_b];
@@ -85,32 +83,15 @@ int	fill_stack(t_stacks *s, char **argray, int i)
 				ft_unique_int(s, ft_atoi(argray[d]), d))
 			s->stacks[i - 1] = ft_atoi(argray[d]);
 		else
-			return (0);
+		{
+			while (argray[d])
+				free(argray[d++]);
+			free(argray);
+			free(s->stacks);
+			exit (0);
+		}
 		free(argray[d]);
 		i--;
-		d++;
-	}
-	return (1);
-}
-
-int	ft_isint(long long int i)
-{
-	if (i <= INT_MAX && i >= INT_MIN)
-		return (1);
-	return (0);
-}
-
-int	ft_unique_int(t_stacks *s, int new, int len)
-{
-	int	i;
-	int	d;
-
-	d = 0;
-	i = s->size_a;
-	while (d < len)
-	{
-		if (s->stacks[i - d - 1] == new)
-			return (0);
 		d++;
 	}
 	return (1);

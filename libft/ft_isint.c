@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jescully <jescully@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/17 14:33:02 by jescully          #+#    #+#             */
-/*   Updated: 2020/11/24 15:48:22 by jescully         ###   ########.fr       */
+/*   Created: 2021/12/06 14:06:43 by jescully          #+#    #+#             */
+/*   Updated: 2021/12/06 14:09:55 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <limits.h>
 
-char	*ft_strrchr(const char *s, int c)
+int	ft_isint(long long int i)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	while (i >= 0)
-	{
-		if (s[i] == c)
-		{
-			return ((char *)&s[i]);
-		}
-		i--;
-	}
+	if (i <= INT_MAX && i >= INT_MIN)
+		return (1);
 	return (0);
 }

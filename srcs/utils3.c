@@ -1,43 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 16:04:58 by jescully          #+#    #+#             */
-/*   Updated: 2021/12/06 14:55:19 by jescully         ###   ########.fr       */
+/*   Created: 2021/12/06 14:38:41 by jescully          #+#    #+#             */
+/*   Updated: 2021/12/06 14:39:27 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	sort(t_stacks *s)
+int	is_sorted(t_stacks *s, int start, int length, char dir)
 {
-	if (is_sorted(s, 0, s->size_a, 'a') || s->size_a == 1)
-		;
-	else if (s->size_a <= 3)
-		lil_sort(s);
-	else if (s->size_a <= 5)
-		small_sort(s);
-	else
-		quick(s);
-	free(s->stacks);
-	return (0);
+	int	d;
+
+	d = start;
+	if (dir == 'a')
+	{
+		while (d < start + length - 1)
+		{
+			if (s->stacks[d] < s->stacks[d + 1])
+				return (0);
+			d++;
+		}
+	}
+	return (1);
 }
 
-int	main(int argc, char **argv)
+int	is_min(int *array, int nbr, int len)
 {
-	t_stacks	s;
+	int	i;
 
-	if (argc != 1)
+	i = 0;
+	while (i < len)
 	{
-		if (!fill_struct(&s, argv, argc))
-		{
-			ft_putstr_fd("Error\n", 2);
+		if (array[i] < nbr)
 			return (0);
-		}
-		sort(&s);
+		i++;
 	}
-	return (0);
+	return (1);
+}
+
+void	ft_swap_ptr(int *a, int *b)
+{
+	int	tempptr;
+
+	tempptr = *a;
+	*a = *b;
+	*b = tempptr;
 }
