@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 14:25:04 by jescully          #+#    #+#             */
-/*   Updated: 2021/12/06 14:41:10 by jescully         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:29:49 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	get_pos(int *arr, int len, int pos)
 
 	i = 0;
 	arrcpy = (int *)ft_calloc(sizeof(int), len + 2);
+	if (!arrcpy)
+		exit (0);
 	while (i < len)
 	{
 		arrcpy[i] = arr[i];

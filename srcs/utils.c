@@ -6,7 +6,7 @@
 /*   By: jescully <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:21:58 by jescully          #+#    #+#             */
-/*   Updated: 2021/12/06 16:23:37 by jescully         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:28:54 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	fill_struct(t_stacks *s, char **argv, int argc)
 	while (argray[s->size_a])
 		s->size_a++;
 	s->stacks = (int *)ft_calloc(sizeof(int), s->size_a * 2 + 1);
+	if (!s->stacks)
+		exit (1);
 	s->size_b = 0;
 	s->start_b = s->size_a;
 	s->stacks_b = &s->stacks[s->start_b];
@@ -49,28 +51,6 @@ int	fill_struct(t_stacks *s, char **argv, int argc)
 	free(argray);
 	return (1);
 }
-/*
-void	print_stacks(t_stacks *s)
-{
-	int	d;
-
-	d = 0;
-	printf("	 stack 1		  stack 2\n");
-	while (d < s->start_b)
-	{
-		printf("		");
-		if (d < s->size_a)
-			printf("%d", s->stacks[d]);
-		else
-			printf(" ");
-		printf("				");
-		if (d < s->size_b && s->size_b != 0)
-			printf("%d", s->stacks[d + s->start_b]);
-		printf("\n");
-		d++;
-	}
-}
-*/
 
 int	fill_stack(t_stacks *s, char **argray, int i)
 {
