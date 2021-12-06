@@ -2,7 +2,7 @@ NAME = libft.a
 
 CC = clang
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 DFLAGS = -Wall -Wextra -Werror -g
 FFLAGS = -fsanitize=address

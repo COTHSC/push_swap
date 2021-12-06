@@ -6,7 +6,7 @@
 /*   By: jescully <jescully@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 13:43:14 by jescully          #+#    #+#             */
-/*   Updated: 2021/12/06 16:20:06 by jescully         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:26:24 by jescully         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <limits.h>
 
 typedef struct s_list
 {
